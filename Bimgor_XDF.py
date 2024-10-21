@@ -289,10 +289,10 @@ class App(cst.CTk):
                 a = file.readlines()
                 for line in range(len(a)):
                     if a[line].strip()[:4] == zakaz:
-                        st0, st1 = a[line].strip().split("|"), a[line + 1].strip().split("|")
+                        st0, st1 = a[line].split("|"), a[line + 1].split("|")
                         temp1, temp2 = str(st0[1]).rstrip(), self.entry_22.get()
                         st0[1] = self.entry_22.get().ljust(18, ' ')
-                        a[line] = "|".join(st0) + "\n"
+                        a[line] = "|".join(st0)
                         with open('Bimgor_XDF.txt', 'w') as file:
                             file.writelines(a)
                         shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
@@ -309,9 +309,9 @@ class App(cst.CTk):
                 a = file.readlines()
                 for line in range(len(a)):
                     if a[line].strip()[:4] == zakaz:
-                        st0, st1 = a[line].strip().split("|"), a[line + 1].strip().split("|")
+                        st0, st1 = a[line].split("|"), a[line + 1].split("|")
                         st0[0] = self.entry_33.get()
-                        a[line] = "|".join(st0) + "\n"
+                        a[line] = "|".join(st0)
                         with open('Bimgor_XDF.txt', 'w') as file:
                             file.writelines(a)
                         shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
