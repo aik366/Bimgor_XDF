@@ -285,17 +285,19 @@ class App(cst.CTk):
             btn_15.place_forget()
             self.text_box.configure(font=self.font_1)
             shutil.copyfile(put + self.op_god.get()[-2:] + '.RSB', '23.txt')
-            a = open(u'23.txt', 'r+').readlines()
-            for line in range(len(a)):
-                S = a[line].split('|')
-                if S[0] == zakaz:
-                    temp1, temp2 = str(S[1]).rstrip(), self.entry_22.get()
-                    S[1] = self.entry_22.get().ljust(18, ' ')
-                    a[line] = '|'.join(S)
-                    open(u'Bimgor_XDF.txt', 'w', True).writelines(a)
-                    shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
-                    self.text_box.delete("0.0", cst.END)
-                    return self.text_box.insert("0.0", temp1 + ' на ' + temp2)
+            with open('23.txt', 'r') as file:
+                a = file.readlines()
+                for line in range(len(a)):
+                    if a[line].strip()[:4] == zakaz:
+                        st0, st1 = a[line].strip().split("|"), a[line + 1].strip().split("|")
+                        temp1, temp2 = str(st0[1]).rstrip(), self.entry_22.get()
+                        st0[1] = self.entry_22.get().ljust(18, ' ')
+                        a[line] = "|".join(st0) + "\n"
+                        with open('Bimgor_XDF.txt', 'w') as file:
+                            file.writelines(a)
+                        shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
+                        self.text_box.delete("0.0", cst.END)
+                        return self.text_box.insert("0.0", temp1 + ' на ' + temp2)
             self.text_box.delete("0.0", cst.END)
             return self.text_box.insert("0.0", 'Нету')
 
@@ -303,17 +305,18 @@ class App(cst.CTk):
             btn_15.place_forget()
             self.text_box.configure(font=self.font_1)
             shutil.copyfile(put + self.op_god.get()[-2:] + '.RSB', '23.txt')
-            a = open(u'23.txt', 'r+').readlines()
-            for line in range(len(a)):
-                S = a[line].split('|')
-                if S[0] == zakaz:
-                    temp1, temp2 = str(S[0]), self.entry_33.get()
-                    S[0] = self.entry_33.get()
-                    a[line] = '|'.join(S)
-                    open(u'Bimgor_XDF.txt', 'w', True).writelines(a)
-                    shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
-                    self.text_box.delete("0.0", cst.END)
-                    return self.text_box.insert("0.0", temp1 + ' на ' + temp2)
+            with open('23.txt', 'r') as file:
+                a = file.readlines()
+                for line in range(len(a)):
+                    if a[line].strip()[:4] == zakaz:
+                        st0, st1 = a[line].strip().split("|"), a[line + 1].strip().split("|")
+                        st0[0] = self.entry_33.get()
+                        a[line] = "|".join(st0) + "\n"
+                        with open('Bimgor_XDF.txt', 'w') as file:
+                            file.writelines(a)
+                        shutil.copyfile('Bimgor_XDF.txt', put + self.op_god.get()[-2:] + '.RSB')
+                        self.text_box.delete("0.0", cst.END)
+                        return self.text_box.insert("0.0", zakaz + ' на ' + self.entry_33.get())
             self.text_box.delete("0.0", cst.END)
             return self.text_box.insert("0.0", 'Нету')
 
